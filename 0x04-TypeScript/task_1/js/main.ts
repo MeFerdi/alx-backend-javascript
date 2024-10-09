@@ -10,15 +10,17 @@ interface Teacher {
     [key: string]: any; 
   }
   
-  // 2. Create an instance of Teacher with additional attributes
-  const teacher3: Teacher = {
-    firstName: 'Shaffie',
+  interface Directors extends Teacher {
+    numberOfReports: number;
+  }
+  
+  // 3. Create an instance of Directors
+  const director1: Directors = {
+    firstName: 'Shafie',
     lastName: 'Weru',
-    fullTimeEmployee: false,
-    location: 'London',
-    contract: false,
+    location: 'Kenya',
+    fullTimeEmployee: true,
+    numberOfReports: 17,
   };
   
-  // 3. Log the teacher object
-  console.log(teacher3);
-  
+  console.log(director1);
