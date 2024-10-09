@@ -22,5 +22,37 @@ interface Teacher {
     fullTimeEmployee: true,
     numberOfReports: 17,
   };
+  interface printTeacherFunction {
+    (firstName: string, lastName: string): string;
+  }
+
+  const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+    return `${firstName.charAt(0)}. ${lastName}`;
+  };
+  interface StudentClassConstructor {
+    firstName: string;
+    lastName: string;
+  }
   
-  console.log(director1);
+  interface StudentClassInterface {
+    workOnHomework(): string;
+    displayName(): string;
+  }
+  
+  class StudentClass implements StudentClassInterface {
+    firstName: string;
+    lastName: string;
+  
+    constructor({ firstName, lastName }: StudentClassConstructor) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+  
+    workOnHomework(): string {
+      return "Currently working";
+    }
+  
+    displayName(): string {
+      return this.firstName;
+    }
+  }
