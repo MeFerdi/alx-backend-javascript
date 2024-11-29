@@ -4,17 +4,35 @@ const { expect } = require('chai');
 const sendPaymentRequestToApi = require('./4-payment');
 
 describe('sendPaymentRequestToApi', () => {
-  it('sendPaymentRequestToApi calls console.log with the right arguments', () => {
-    const bigBrother = sinon.spy(console);
-    const dummy = sinon.stub(Utils, 'calculateNumber');
+    let consoleLogSpy;
+    let calculateNumberStub;
 
-    dummy.returns(10);
-    sendPaymentRequestToApi(100, 20);
-    expect(dummy.calledWith('SUM', 100, 20)).to.be.true;
-    expect(dummy.callCount).to.be.equal(1);
-    expect(bigBrother.log.calledWith('The total is: 10')).to.be.true;
-    expect(bigBrother.log.callCount).to.be.equal(1);
-    dummy.restore();
-    bigBrother.log.restore();
-  });
+    beforeEach(() => {
+        // Spy on console.log
+        consoleLogSpy = sinon.spy(console, 'log');
+        // Stub Utils.calculateNumber
+        calculateNumberStub = sinon.stub(Utils, 'calculateNumber');
+    });
+
+    afterEach(() => {
+        // Restore the original methods after each test
+        consoleLogSpy.restore();
+        calculateNumberStub.restore();
+    });
+
+    it('should call Utils.calculateNumber with correct arguments', () => {
+        calculateNumberStub.returns(120); // Set return value for the stub
+        sendPaymentRequestToApi(100, 20);
+        
+        expect(calculateNumberStub.calledWith('SUM', 100, 20)).to.be.true;
+        expect(calculateNumberStub.callCount).to.equal(1);
+    });
+
+    it('should log the correct total', () => {
+        calculateNumberStub.returns(120); // Set return value for the stub
+        sendPaymentRequestToApi(100, 20);
+        
+        expect(consoleLogSpy.calledWith('The total is: 120')).to.be.true;
+        expect(consoleLogSpy.callCount).to.equal(1);
+    });
 });
