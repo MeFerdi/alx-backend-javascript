@@ -1,4 +1,3 @@
-// 4-payment.js
 const Utils = require('./utils');
 
 const sendPaymentRequestToApi = (totalAmount, totalShipping) => {
